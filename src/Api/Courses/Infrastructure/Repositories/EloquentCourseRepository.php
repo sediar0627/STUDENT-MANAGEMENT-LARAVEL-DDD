@@ -9,6 +9,21 @@ use Src\Api\Courses\Domain\ValueObjects\CourseDate;
 
 class EloquentCourseRepository implements CourseRepositoryInterface
 {
+	public function all(): array
+	{
+		return EloquentCourse::all()
+			->map(function (EloquentCourse $course) {
+				return new Course(
+					id: $course->id,
+					title: $course->title,
+					description: $course->description,
+					startDate: new CourseDate($course->start_date),
+					endDate: new CourseDate($course->end_date),
+				);
+			})
+			->toArray();
+	}
+
 	public function findById(int $id): ?Course
 	{
 		$course = EloquentCourse::find($id);

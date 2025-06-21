@@ -6,6 +6,8 @@ use Src\Api\Courses\Domain\Entities\Course;
 
 interface CourseRepositoryInterface
 {
+	public function all(): array;
+
 	public function findById(int $id): ?Course;
 
 	public function save(Course $course): Course;

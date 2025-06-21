@@ -6,7 +6,7 @@ use Src\Api\Courses\Domain\Entities\Course;
 
 class CourseResource
 {
-	public function toArray(Course $course): array
+	public function toArrayByCourse(Course $course): array
 	{
 		return [
 			'id' => $course->id(),
@@ -15,5 +15,12 @@ class CourseResource
 			'start_date' => $course->startDate()->toFormat(),
 			'end_date' => $course->endDate()->toFormat(),
 		];
+	}
+
+	public function toArrayByCourses(array $courses): array
+	{
+		return array_map(function (Course $course) {
+			return $this->toArrayByCourse($course);
+		}, $courses);
 	}
 }

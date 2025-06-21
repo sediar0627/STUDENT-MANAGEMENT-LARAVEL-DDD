@@ -4,6 +4,7 @@ namespace App\Enum;
 
 enum ControllerStatusDescription: string
 {
+	case OK = 'ok';
 	case CREATED = 'created';
 	case UPDATED = 'updated';
 	case DELETED = 'deleted';
@@ -16,6 +17,7 @@ enum ControllerStatusDescription: string
 	public function httpCode(): int
 	{
 		return match ($this) {
+			self::OK => 200,
 			self::CREATED => 201,
 			self::UPDATED => 200,
 			self::DELETED => 204,
