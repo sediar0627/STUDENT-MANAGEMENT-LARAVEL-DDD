@@ -2,8 +2,10 @@
 
 namespace Src\Api\Courses\Application;
 
+use Src\Api\Courses\Domain\Entities\Course;
 use Src\Api\Courses\Domain\Interfaces\CourseRepositoryInterface;
-class GetAllCoursesUseCase
+
+class FindCourseByIdUseCase
 {
 	private CourseRepositoryInterface $courseRepository;
 
@@ -12,8 +14,8 @@ class GetAllCoursesUseCase
 		$this->courseRepository = $courseRepository;
 	}
 
-	public function execute(): array
+	public function execute(int $id): ?Course
 	{
-		return $this->courseRepository->all();
+		return $this->courseRepository->findById($id);
 	}
 }
