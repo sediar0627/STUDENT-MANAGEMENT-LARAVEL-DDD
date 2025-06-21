@@ -20,7 +20,7 @@ enum ControllerStatusDescription: string
 			self::OK => 200,
 			self::CREATED => 201,
 			self::UPDATED => 200,
-			self::DELETED => 204,
+			self::DELETED => 200,
 			self::NOT_FOUND => 404,
 			self::BAD_REQUEST => 422,
 			self::UNAUTHORIZED => 401,
