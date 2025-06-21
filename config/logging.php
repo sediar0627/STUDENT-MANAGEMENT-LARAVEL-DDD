@@ -127,6 +127,13 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'endpoint_hit' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/endpoint_hit.log'),
+            'level' => 'info',
+            'replace_placeholders' => true,
+        ],
+
     ],
 
 ];
