@@ -27,6 +27,7 @@ class LogEndpointHit
             'ip' => $request->ip(),
             'method' => $request->method(),
             'url' => $request->url(),
+            'path' => $request->path(),
             'time' => $timeMs,
         ]);
 
