@@ -2,7 +2,10 @@
 
 namespace Src\Api\Students\Infrastructure\Repositories;
 
+use App\Models\Courses\Course as EloquentCourse;
 use App\Models\Students\Student as EloquentStudent;
+use Src\Api\Courses\Domain\Entities\Course;
+use Src\Api\Courses\Domain\ValueObjects\CourseDate;
 use Src\Api\Students\Domain\Entities\Student;
 use Src\Api\Students\Domain\Interfaces\StudentRepostitoryInterface;
 use Src\Api\Students\Domain\ValueObjects\StudentEmail;
@@ -61,5 +64,33 @@ class EloquentStudentRepository implements StudentRepostitoryInterface
     public function delete(int $id): void 
 	{
 		EloquentStudent::destroy($id);
+	}
+
+	public function allWithCourses(): array
+	{
+		return EloquentStudent::with(['courses'])
+			->withCourses()
+			->get()
+			->map(function (EloquentStudent $student) {
+				$courses = $student->courses->map(function (EloquentCourse $course) {
+					return new Course(
+						id: $course->id,
+						title: $course->title,
+						description: $course->description,
+						startDate: new CourseDate($course->start_date),
+						endDate: new CourseDate($course->end_date),
+					);
+				})
+				->toArray();
+
+				return new Student(
+					id: $student->id,
+					email: new StudentEmail($student->email),
+					first_name: $student->first_name,
+					last_name: $student->last_name,
+					courses: $courses,
+				);
+			})
+			->toArray();
 	}
 }

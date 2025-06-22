@@ -13,4 +13,6 @@ interface StudentRepostitoryInterface
     public function save(Student $student): Student;
 
     public function delete(int $id): void;
+
+    public function allWithCourses(): array;
 }

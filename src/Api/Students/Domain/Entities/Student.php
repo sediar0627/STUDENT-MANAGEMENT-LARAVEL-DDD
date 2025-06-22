@@ -11,6 +11,7 @@ class Student
         private StudentEmail $email,
         private string $first_name,
         private string $last_name,
+		private array $courses = [],
     ) {
     }
 
@@ -37,5 +38,10 @@ class Student
     public function fullName(): string
     {
         return $this->firstName() . ' ' . $this->lastName();
+    }
+
+    public function courses(): array
+    {
+        return $this->courses;
     }
 }

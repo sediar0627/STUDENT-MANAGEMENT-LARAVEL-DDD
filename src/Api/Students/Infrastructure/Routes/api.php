@@ -6,9 +6,11 @@ use Src\Api\Students\Infrastructure\Controllers\DeleteStudentByIdDELETEControlle
 use Src\Api\Students\Infrastructure\Controllers\FindStudentByIdGETController;
 use Src\Api\Students\Infrastructure\Controllers\GetAllStudentsGETController;
 use Src\Api\Students\Infrastructure\Controllers\UpdateStudentPUTController;
+use Src\Api\Students\Infrastructure\Controllers\WithCoursesGETController;
 
 Route::post('/', [CreateStudentPOSTController::class, 'handle']);
 Route::get('/', [GetAllStudentsGETController::class, 'handle']);
+Route::get('/with-courses', [WithCoursesGETController::class, 'handle']);
 Route::get('/{id}', [FindStudentByIdGETController::class, 'handle']);
 Route::put('/{id}', [UpdateStudentPUTController::class, 'handle']);
 Route::delete('/{id}', [DeleteStudentByIdDELETEController::class, 'handle']);
