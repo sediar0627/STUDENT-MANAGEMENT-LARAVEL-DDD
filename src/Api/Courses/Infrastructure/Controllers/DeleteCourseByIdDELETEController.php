@@ -18,7 +18,7 @@ class DeleteCourseByIdDELETEController extends Controller
 		private EloquentCourseRepository $courseRepository
 	){}
 
-	public function __invoke(string $id): JsonResponse
+	public function handle(string $id): JsonResponse
 	{
 		$findCourseByIdUseCase = new FindCourseByIdUseCase($this->courseRepository);
 

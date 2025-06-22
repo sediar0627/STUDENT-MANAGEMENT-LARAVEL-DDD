@@ -11,7 +11,7 @@ use Src\Api\Courses\Infrastructure\Resource\CourseResource;
 
 class GetAllCoursesGETController extends Controller
 {
-	public function __invoke(): JsonResponse
+	public function handle(): JsonResponse
 	{
 		$getAllCoursesUseCase = new GetAllCoursesUseCase(new EloquentCourseRepository());
 

@@ -19,7 +19,7 @@ class UpdateStudentPUTController extends Controller
 		$this->studentRepository = new EloquentStudentRepository();
 	}
 
-	public function __invoke(StudentRequest $request, string $id): JsonResponse
+	public function handle(StudentRequest $request, string $id): JsonResponse
 	{
 		$dbStudent = $this->studentRepository->findById($id);
 

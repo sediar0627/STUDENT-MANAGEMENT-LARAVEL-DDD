@@ -7,8 +7,8 @@ use Src\Api\Courses\Infrastructure\Controllers\FindCourseByIdGETController;
 use Src\Api\Courses\Infrastructure\Controllers\GetAllCoursesGETController;
 use Src\Api\Courses\Infrastructure\Controllers\UpdateCoursePUTController;
 
-Route::post('/', CreateCoursePOSTController::class);
-Route::get('/', GetAllCoursesGETController::class);
-Route::get('/{id}', FindCourseByIdGETController::class);
-Route::put('/{id}', UpdateCoursePUTController::class);
-Route::delete('/{id}', DeleteCourseByIdDELETEController::class);
+Route::post('/', [CreateCoursePOSTController::class, 'handle']);
+Route::get('/', [GetAllCoursesGETController::class, 'handle']);
+Route::get('/{id}', [FindCourseByIdGETController::class, 'handle']);
+Route::put('/{id}', [UpdateCoursePUTController::class, 'handle']);
+Route::delete('/{id}', [DeleteCourseByIdDELETEController::class, 'handle']);

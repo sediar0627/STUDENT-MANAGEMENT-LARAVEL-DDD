@@ -11,7 +11,7 @@ use Src\Api\Students\Infrastructure\Resources\StudentResource;
 
 class FindStudentByIdGETController extends Controller
 {
-	public function __invoke(string $id): JsonResponse
+	public function handle(string $id): JsonResponse
 	{
 		$findStudentByIdUseCase = new FindStudentByIdUseCase(new EloquentStudentRepository());
 

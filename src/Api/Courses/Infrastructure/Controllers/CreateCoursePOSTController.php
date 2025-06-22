@@ -12,7 +12,7 @@ use Src\Api\Courses\Infrastructure\Resource\CourseResource;
 
 class CreateCoursePOSTController extends Controller
 {
-	public function __invoke(CourseRequest $request): JsonResponse
+	public function handle(CourseRequest $request): JsonResponse
 	{
 		$requestData = $request->validated();
 

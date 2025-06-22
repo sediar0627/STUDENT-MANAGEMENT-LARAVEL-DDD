@@ -7,8 +7,8 @@ use Src\Api\Students\Infrastructure\Controllers\FindStudentByIdGETController;
 use Src\Api\Students\Infrastructure\Controllers\GetAllStudentsGETController;
 use Src\Api\Students\Infrastructure\Controllers\UpdateStudentPUTController;
 
-Route::post('/', CreateStudentPOSTController::class);
-Route::get('/', GetAllStudentsGETController::class);
-Route::get('/{id}', FindStudentByIdGETController::class);
-Route::put('/{id}', UpdateStudentPUTController::class);
-Route::delete('/{id}', DeleteStudentByIdDELETEController::class);
+Route::post('/', [CreateStudentPOSTController::class, 'handle']);
+Route::get('/', [GetAllStudentsGETController::class, 'handle']);
+Route::get('/{id}', [FindStudentByIdGETController::class, 'handle']);
+Route::put('/{id}', [UpdateStudentPUTController::class, 'handle']);
+Route::delete('/{id}', [DeleteStudentByIdDELETEController::class, 'handle']);

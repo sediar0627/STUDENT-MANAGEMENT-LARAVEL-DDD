@@ -11,7 +11,7 @@ use Src\Api\Students\Infrastructure\Resources\StudentResource;
 
 class GetAllStudentsGETController extends Controller
 {
-	public function __invoke(): JsonResponse
+	public function handle(): JsonResponse
 	{
 		$getAllStudentsUseCase = new GetAllStudentsUseCase(new EloquentStudentRepository());
 

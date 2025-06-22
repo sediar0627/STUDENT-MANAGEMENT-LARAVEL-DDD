@@ -13,7 +13,7 @@ use Src\Api\Courses\Infrastructure\Resource\CourseResource;
 
 class FindCourseByIdGETController extends Controller
 {
-	public function __invoke(string $id): JsonResponse
+	public function handle(string $id): JsonResponse
 	{
 		$findCourseByIdUseCase = new FindCourseByIdUseCase(new EloquentCourseRepository());
 		$course = $findCourseByIdUseCase->execute($id);

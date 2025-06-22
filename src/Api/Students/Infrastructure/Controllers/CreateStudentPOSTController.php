@@ -19,7 +19,7 @@ class CreateStudentPOSTController extends Controller
 		$this->studentRepository = new EloquentStudentRepository();
 	}
 
-	public function __invoke(StudentRequest $request): JsonResponse
+	public function handle(StudentRequest $request): JsonResponse
 	{
 		$requestData = $request->validated();
 

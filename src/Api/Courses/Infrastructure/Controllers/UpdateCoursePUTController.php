@@ -19,7 +19,7 @@ class UpdateCoursePUTController extends Controller
 		$this->repository = new EloquentCourseRepository();
 	}
 
-	public function __invoke(CourseRequest $request, string $id): JsonResponse
+	public function handle(CourseRequest $request, string $id): JsonResponse
 	{
 		$dbCourse = $this->repository->findById($id);
 
