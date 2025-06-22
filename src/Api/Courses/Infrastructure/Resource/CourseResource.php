@@ -26,6 +26,10 @@ class CourseResource
 			}, $course->students());
 		}
 
+		if(!is_null($course->studentsCount())){
+			$data['students_count'] = $course->studentsCount();
+		}
+
 		return $data;
 	}
 

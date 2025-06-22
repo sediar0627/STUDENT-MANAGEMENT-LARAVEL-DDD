@@ -15,4 +15,6 @@ interface CourseRepositoryInterface
 	public function delete(int $id): void;
 
 	public function allWithStudents(): array;
+
+	public function allWithStudentsCount(): array;
 }

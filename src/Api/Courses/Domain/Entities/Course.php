@@ -13,6 +13,7 @@ class Course
         private CourseDate $startDate,
         private CourseDate $endDate,
 		private array $students = [],
+		private int|null $students_count = null,
     ) {
 
 	}
@@ -45,5 +46,14 @@ class Course
 	public function students(): array
 	{
 		return $this->students;
+	}
+
+	public function studentsCount(bool $count = false): int|null
+	{
+		if($count){
+			return count($this->students);
+		}
+
+		return $this->students_count;
 	}
 }

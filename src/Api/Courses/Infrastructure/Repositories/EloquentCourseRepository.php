@@ -98,4 +98,21 @@ class EloquentCourseRepository implements CourseRepositoryInterface
 			})
 			->toArray();
 	}
+
+	public function allWithStudentsCount(): array
+	{
+		return EloquentCourse::withCount('students')
+			->get()
+			->map(function (EloquentCourse $course) {
+				return new Course(
+					id: $course->id,
+					title: $course->title,
+					description: $course->description,
+					startDate: new CourseDate($course->start_date),
+					endDate: new CourseDate($course->end_date),
+					students_count: $course->students_count,
+				);
+			})
+			->toArray();
+	}
 }
