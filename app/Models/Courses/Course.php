@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
 
 class Course extends Model
 {
@@ -39,5 +40,10 @@ class Course extends Model
         return $this->belongsToMany(Student::class, 'enrollments', 'course_id', 'student_id')
             ->withPivot('enrolled_at')
             ->withTimestamps();
+    }
+
+    public function scopeWithStudents(Builder $query): void
+    {
+        $query->has('students');
     }
 }
