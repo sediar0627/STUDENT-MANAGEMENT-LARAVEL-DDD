@@ -14,9 +14,26 @@ use Src\Api\Courses\Infrastructure\Resource\CourseResource;
 
 class DeleteCourseByIdDELETEController extends Controller
 {
+	public function __construct(
+		private EloquentCourseRepository $courseRepository
+	){}
+
 	public function __invoke(string $id): JsonResponse
 	{
-		$deleteCourseByIdUseCase = new DeleteCourseByIdUseCase(new EloquentCourseRepository());
+		$findCourseByIdUseCase = new FindCourseByIdUseCase($this->courseRepository);
+
+		$course = $findCourseByIdUseCase->execute($id);
+
+		if (!$course) {
+			return response()->json(
+				data: [
+					'status' => ControllerStatusDescription::NOT_FOUND->value,
+				],
+				status: ControllerStatusDescription::NOT_FOUND->httpCode()
+			);
+		}
+
+		$deleteCourseByIdUseCase = new DeleteCourseByIdUseCase($this->courseRepository);
 		$deleteCourseByIdUseCase->execute($id);
 
 		return response()->json(
