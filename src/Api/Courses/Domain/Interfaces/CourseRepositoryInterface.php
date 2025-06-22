@@ -13,4 +13,6 @@ interface CourseRepositoryInterface
 	public function save(Course $course): Course;
 
 	public function delete(int $id): void;
+
+	public function allWithStudents(): array;
 }

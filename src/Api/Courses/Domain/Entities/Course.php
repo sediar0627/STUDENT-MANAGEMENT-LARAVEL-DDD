@@ -12,6 +12,7 @@ class Course
         private string|null $description,
         private CourseDate $startDate,
         private CourseDate $endDate,
+		private array $students = [],
     ) {
 
 	}
@@ -39,5 +40,10 @@ class Course
 	public function endDate(): CourseDate
 	{
 		return $this->endDate;
+	}
+
+	public function students(): array
+	{
+		return $this->students;
 	}
 }
