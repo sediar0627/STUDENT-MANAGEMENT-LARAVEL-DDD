@@ -5,11 +5,11 @@ namespace App\Models\Enrollments;
 use App\Models\Courses\Course;
 use App\Models\Students\Student;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Enrollment extends Pivot
+class Enrollment extends Model
 {
     use HasFactory;
     use SoftDeletes;

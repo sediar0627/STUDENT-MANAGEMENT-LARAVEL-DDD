@@ -8,4 +8,5 @@ Route::prefix('v1')
     ->group(function () {
         Route::prefix('courses')->group(base_path('src/Api/Courses/Infrastructure/Routes/api.php'));
         Route::prefix('students')->group(base_path('src/Api/Students/Infrastructure/Routes/api.php'));
+        Route::prefix('enrollments')->group(base_path('src/Api/Enrollments/Infrastucture/Routes/api.php'));
     });
