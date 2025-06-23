@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\PermissionCase;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,27 +14,27 @@ return new class () extends Migration {
     public function up(): void
     {
         $permissions = [
-            'create-course',
-            'edit-course',
-            'delete-course',
-            'view-course',
+            PermissionCase::CREATE_COURSE->value,
+            PermissionCase::EDIT_COURSE->value,
+            PermissionCase::DELETE_COURSE->value,
+            PermissionCase::VIEW_COURSE->value,
 
-            'create-student',
-            'edit-student',
-            'delete-student',
-            'view-student',
+            PermissionCase::CREATE_STUDENT->value,
+            PermissionCase::EDIT_STUDENT->value,
+            PermissionCase::DELETE_STUDENT->value,
+            PermissionCase::VIEW_STUDENT->value,
         ];
 
         foreach ($permissions as $permission) {
             Permission::firstOrCreate([
                 'name' => $permission,
-                'guard_name' => 'api',
+                'guard_name' => 'web',
             ]);
         }
 
         $superAdmin = Role::firstOrCreate([
             'name' => 'super-admin',
-            'guard_name' => 'api',
+            'guard_name' => 'web',
         ]);
 
         $superAdmin->givePermissionTo(Permission::all());

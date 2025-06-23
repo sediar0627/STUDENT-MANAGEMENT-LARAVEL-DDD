@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enum\PermissionCase;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +14,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $superAdmin = User::factory()->create([
+            'name' => 'Super Admin',
+            'email' => 'super_admin@example.com',
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $superAdmin->assignRole('super-admin');
+
+        $courseUser = User::factory()->create([
+            'name' => 'Course User',
+            'email' => 'course_user@example.com',
+        ]);
+
+        $courseUser->givePermissionTo([
+            PermissionCase::CREATE_STUDENT->value,
+            PermissionCase::EDIT_STUDENT->value,
+            PermissionCase::DELETE_STUDENT->value,
+            PermissionCase::VIEW_STUDENT->value,
+        ]);
+
+        $studentUser = User::factory()->create([
+            'name' => 'Student User',
+            'email' => 'student_user@example.com',
+        ]);
+
+        $studentUser->givePermissionTo([
+            PermissionCase::CREATE_STUDENT->value,
+            PermissionCase::EDIT_STUDENT->value,
+            PermissionCase::DELETE_STUDENT->value,
+            PermissionCase::VIEW_STUDENT->value,
         ]);
     }
 }

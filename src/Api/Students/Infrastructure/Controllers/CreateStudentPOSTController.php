@@ -9,6 +9,8 @@ use Src\Api\Students\Application\SaveStudentUseCase;
 use Src\Api\Students\Infrastructure\Repositories\EloquentStudentRepository;
 use Src\Api\Students\Infrastructure\Request\StudentRequest;
 use Src\Api\Students\Infrastructure\Resources\StudentResource;
+use App\Models\Students\Student as EloquentStudent;
+use Illuminate\Support\Facades\Gate;
 
 class CreateStudentPOSTController extends Controller
 {
@@ -21,6 +23,17 @@ class CreateStudentPOSTController extends Controller
 
 	public function handle(StudentRequest $request): JsonResponse
 	{
+		$authorize = Gate::inspect('create', EloquentStudent::class);
+
+		if(!$authorize->allowed()){
+			return response()->json(
+				data: [
+					'status' => ControllerStatusDescription::FORBIDDEN->value,
+				],
+				status: ControllerStatusDescription::FORBIDDEN->httpCode()
+			);
+		}
+
 		$requestData = $request->validated();
 
 		$saveStudentUseCase = new SaveStudentUseCase($this->studentRepository);
