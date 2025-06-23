@@ -27,10 +27,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $courseUser->givePermissionTo([
-            PermissionCase::CREATE_STUDENT->value,
-            PermissionCase::EDIT_STUDENT->value,
-            PermissionCase::DELETE_STUDENT->value,
-            PermissionCase::VIEW_STUDENT->value,
+            PermissionCase::CREATE_COURSE->value,
+            PermissionCase::EDIT_COURSE->value,
+            PermissionCase::DELETE_COURSE->value,
+            PermissionCase::VIEW_COURSE->value,
         ]);
 
         $studentUser = User::factory()->create([
