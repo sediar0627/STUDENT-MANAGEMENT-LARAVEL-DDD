@@ -2,7 +2,7 @@
 
 namespace Src\Api\Students\Infrastructure\Request;
 
-use App\Http\Request\CustomFormRequest;
+use App\Http\Requests\CustomFormRequest;
 use Src\Api\Students\Infrastructure\Rules\StudentEmailRule;
 
 class StudentRequest extends CustomFormRequest

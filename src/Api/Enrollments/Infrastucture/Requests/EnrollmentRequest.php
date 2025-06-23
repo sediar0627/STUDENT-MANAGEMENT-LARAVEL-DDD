@@ -2,7 +2,7 @@
 
 namespace Src\Api\Enrollments\Infrastucture\Requests;
 
-use App\Http\Request\CustomFormRequest;
+use App\Http\Requests\CustomFormRequest;
 use Src\Api\Enrollments\Infrastucture\Repositories\EloquentEnrollmentRepository;
 
 class EnrollmentRequest extends CustomFormRequest

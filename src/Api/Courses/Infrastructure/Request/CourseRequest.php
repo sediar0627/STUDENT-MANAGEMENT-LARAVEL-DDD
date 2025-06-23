@@ -2,7 +2,7 @@
 
 namespace Src\Api\Courses\Infrastructure\Request;
 
-use App\Http\Request\CustomFormRequest;
+use App\Http\Requests\CustomFormRequest;
 
 class CourseRequest extends CustomFormRequest
 {
