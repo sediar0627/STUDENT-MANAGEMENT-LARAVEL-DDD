@@ -37,7 +37,7 @@ class CreateEnrollmentPOSTController extends Controller
 		return response()->json(
 			data: [
 				'status' => ControllerStatusDescription::CREATED->value,
-				'enrollment' => (new EnrollmentResource())->toArray($enrollment),
+				'enrollment' => new EnrollmentResource($enrollment),
 			],
 			status: ControllerStatusDescription::CREATED->httpCode()
 		);

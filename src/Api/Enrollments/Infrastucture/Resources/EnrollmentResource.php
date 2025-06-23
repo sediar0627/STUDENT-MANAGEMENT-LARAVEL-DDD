@@ -2,19 +2,36 @@
 
 namespace Src\Api\Enrollments\Infrastucture\Resources;
 
-use Src\Api\Enrollments\Domain\Entities\Enrollment;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Src\Api\Courses\Infrastructure\Resource\CourseResource;
+use Src\Api\Enrollments\Domain\Entities\Enrollment;
 use Src\Api\Students\Infrastructure\Resources\StudentResource;
 
-class EnrollmentResource
+class EnrollmentResource extends JsonResource
 {
-	public function toArray(Enrollment $enrollment): array
+	/**
+     * Create a new resource instance.
+     *
+     * @param  mixed  $resource
+     */
+    public function __construct(Enrollment $resource)
+    {
+        parent::__construct($resource);
+    }
+	
+	/**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+	public function toArray(Request $request): array
 	{
 		return [
-			'id' => $enrollment->id(),
-			'student' => (new StudentResource())->toArrayByStudent($enrollment->student()),
-			'course' => (new CourseResource())->toArrayByCourse($enrollment->course()),
-			'enrolled_at' => $enrollment->enrolledAt()->toFormat(),
+			'id' => $this->id(),
+			'student' => new StudentResource($this->student()),
+			'course' => new CourseResource($this->course()),
+			'enrolled_at' => $this->enrolledAt()->toFormat(),
 		];
 	}
 }
