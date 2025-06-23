@@ -8,8 +8,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 use Src\Api\Courses\Application\WithStudentsUseCase;
 use Src\Api\Courses\Infrastructure\Repositories\EloquentCourseRepository;
-use Src\Api\Courses\Infrastructure\Resource\CourseResource;
 use App\Models\Courses\Course as EloquentCourse;
+use Src\Api\Courses\Infrastructure\Resource\CourseCollectionResource;
 
 class WithStudentsGETController extends Controller
 {
@@ -33,7 +33,7 @@ class WithStudentsGETController extends Controller
         return response()->json(
             data: [
                 'status' => ControllerStatusDescription::OK->value,
-                'courses_with_students' => (new CourseResource())->toArrayByCourses($coursesWithStudents),
+                'courses_with_students' => new CourseCollectionResource($coursesWithStudents),
             ],
             status: ControllerStatusDescription::OK->httpCode()
         );

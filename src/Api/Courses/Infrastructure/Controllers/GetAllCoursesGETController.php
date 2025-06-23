@@ -10,6 +10,7 @@ use Src\Api\Courses\Application\GetAllCoursesUseCase;
 use Src\Api\Courses\Infrastructure\Repositories\EloquentCourseRepository;
 use Src\Api\Courses\Infrastructure\Resource\CourseResource;
 use App\Models\Courses\Course as EloquentCourse;
+use Src\Api\Courses\Infrastructure\Resource\CourseCollectionResource;
 
 class GetAllCoursesGETController extends Controller
 {
@@ -33,7 +34,7 @@ class GetAllCoursesGETController extends Controller
         return response()->json(
             data: [
                 'status' => ControllerStatusDescription::OK->value,
-                'courses' => (new CourseResource())->toArrayByCourses($courses),
+                'courses' => new CourseCollectionResource($courses),
             ],
             status: ControllerStatusDescription::OK->httpCode()
         );

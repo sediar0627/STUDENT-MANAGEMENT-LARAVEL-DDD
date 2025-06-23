@@ -42,7 +42,7 @@ class CreateCoursePOSTController extends Controller
 		return response()->json(
 			data: [
 				'status' => ControllerStatusDescription::CREATED->value,
-				'course' => (new CourseResource())->toArrayByCourse($course),
+				'course' => new CourseResource($course),
 			],
 			status: ControllerStatusDescription::CREATED->httpCode()
 		);

@@ -60,7 +60,7 @@ class UpdateCoursePUTController extends Controller
         return response()->json(
             data: [
                 'status' => ControllerStatusDescription::UPDATED->value,
-                'course' => (new CourseResource())->toArrayByCourse($course),
+                'course' => new CourseResource($course),
             ],
             status: ControllerStatusDescription::UPDATED->httpCode()
         );

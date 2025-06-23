@@ -42,7 +42,7 @@ class FindCourseByIdGETController extends Controller
         return response()->json(
             data: [
                 'status' => ControllerStatusDescription::OK->value,
-                'course' => (new CourseResource())->toArrayByCourse($course),
+                'course' => new CourseResource($course),
             ],
             status: ControllerStatusDescription::OK->httpCode()
         );

@@ -2,41 +2,34 @@
 
 namespace Src\Api\Courses\Infrastructure\Resource;
 
-use Src\Api\Courses\Domain\Entities\Course;
-use Src\Api\Students\Domain\Entities\Student;
-use Src\Api\Students\Infrastructure\Resources\StudentResource;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class CourseResource
+class CourseResource extends JsonResource
 {
-	public function toArrayByCourse(Course $course): array
-	{
-		$data = [
-			'id' => $course->id(),
-			'title' => $course->title(),
-			'description' => $course->description(),
-			'start_date' => $course->startDate()->toFormat(),
-			'end_date' => $course->endDate()->toFormat(),
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        $data = [
+			'id' => $this->id(),
+			'title' => $this->title(),
+			'description' => $this->description(),
+			'start_date' => $this->startDate()->toFormat(),
+			'end_date' => $this->endDate()->toFormat(),
 		];
 
-		if(count($course->students()) > 0){
-			$data['students'] = array_map(function (Student $student) {
-				
-				return (new StudentResource())->toArrayByStudent($student);
-
-			}, $course->students());
+		if (count($this->students()) > 0) {
+			
 		}
 
-		if(!is_null($course->studentsCount())){
-			$data['students_count'] = $course->studentsCount();
+		if (!is_null($this->studentsCount())) {
+			$data['students_count'] = $this->studentsCount();
 		}
 
-		return $data;
-	}
-
-	public function toArrayByCourses(array $courses): array
-	{
-		return array_map(function (Course $course) {
-			return $this->toArrayByCourse($course);
-		}, $courses);
-	}
+        return $data;
+    }
 }
