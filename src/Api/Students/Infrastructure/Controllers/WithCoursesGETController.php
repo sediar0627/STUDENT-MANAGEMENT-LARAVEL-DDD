@@ -10,6 +10,7 @@ use Src\Api\Students\Infrastructure\Repositories\EloquentStudentRepository;
 use Src\Api\Students\Infrastructure\Resources\StudentResource;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Students\Student as EloquentStudent;
+use Src\Api\Students\Infrastructure\Resources\StudentCollectionResource;
 
 class WithCoursesGETController extends Controller
 {
@@ -33,7 +34,7 @@ class WithCoursesGETController extends Controller
 		return response()->json(
 			data: [
 				'status' => ControllerStatusDescription::OK->value,
-				'student_with_courses' => (new StudentResource())->toArrayByStudents($studentsWithCourses),
+				'student_with_courses' => new StudentCollectionResource($studentsWithCourses),
 			],
 			status: ControllerStatusDescription::OK->httpCode()
 		);

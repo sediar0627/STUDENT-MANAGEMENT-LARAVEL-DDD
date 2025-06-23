@@ -42,7 +42,7 @@ class FindStudentByIdGETController extends Controller
 		return response()->json(
 			data: [
 				'status' => ControllerStatusDescription::OK->value,
-				'student' => (new StudentResource())->toArrayByStudent($student),
+				'student' => new StudentResource($student),
 			],
 			status: ControllerStatusDescription::OK->httpCode()
 		);

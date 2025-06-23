@@ -5,6 +5,8 @@ namespace Src\Api\Courses\Infrastructure\Resource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Src\Api\Courses\Domain\Entities\Course;
+use Src\Api\Students\Domain\Entities\Student;
+use Src\Api\Students\Infrastructure\Resources\StudentResource;
 
 class CourseResource extends JsonResource
 {
@@ -34,7 +36,9 @@ class CourseResource extends JsonResource
 		];
 
 		if (count($this->students()) > 0) {
-			
+			$data['students'] = array_map(function (Student $student) {
+				return new StudentResource($student);
+			}, $this->students());
 		}
 
 		if (!is_null($this->studentsCount())) {

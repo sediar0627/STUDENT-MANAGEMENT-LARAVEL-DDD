@@ -2,34 +2,44 @@
 
 namespace Src\Api\Students\Infrastructure\Resources;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Src\Api\Courses\Domain\Entities\Course;
 use Src\Api\Courses\Infrastructure\Resource\CourseResource;
 use Src\Api\Students\Domain\Entities\Student;
 
-class StudentResource
+class StudentResource extends JsonResource
 {
-	public function toArrayByStudent(Student $student): array
-	{
-		$data = [
-			'id' => $student->id(),
-			'email' => $student->email()->value(),
-			'first_name' => $student->firstName(),
-			'last_name' => $student->lastName(),
+	/**
+     * Create a new resource instance.
+     *
+     * @param  mixed  $resource
+     */
+    public function __construct(Student $resource)
+    {
+        parent::__construct($resource);
+    }
+
+	/**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        $data = [
+			'id' => $this->id(),
+			'email' => $this->email()->value(),
+			'first_name' => $this->firstName(),
+			'last_name' => $this->lastName(),
 		];
 
-		if(count($student->courses()) > 0){
+		if(count($this->courses()) > 0){
 			$data['courses'] = array_map(function (Course $course) {
-				return (new CourseResource())->toArrayByCourse($course);
-			}, $student->courses());
+				return new CourseResource($course);
+			}, $this->courses());
 		}
 
-		return $data;
-	}
-
-	public function toArrayByStudents(array $students): array
-	{
-		return array_map(function (Student $student) {
-			return $this->toArrayByStudent($student);
-		}, $students);
-	}
+        return $data;
+    }
 }

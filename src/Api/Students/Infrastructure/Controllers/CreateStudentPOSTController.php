@@ -48,7 +48,7 @@ class CreateStudentPOSTController extends Controller
 		return response()->json(
 			data: [
 				'status' => ControllerStatusDescription::CREATED->value,
-				'student' => (new StudentResource())->toArrayByStudent($student),
+				'student' => new StudentResource($student),
 			],
 			status: ControllerStatusDescription::CREATED->httpCode()
 		);

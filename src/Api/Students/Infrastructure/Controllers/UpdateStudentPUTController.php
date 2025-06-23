@@ -58,7 +58,7 @@ class UpdateStudentPUTController extends Controller
 		return response()->json(
 			data: [
 				'status' => ControllerStatusDescription::UPDATED->value,
-				'student' => (new StudentResource())->toArrayByStudent($student),
+				'student' => new StudentResource($student),
 			],
 			status: ControllerStatusDescription::UPDATED->httpCode()
 		);
