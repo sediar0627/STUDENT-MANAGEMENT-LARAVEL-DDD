@@ -4,9 +4,20 @@ namespace Src\Api\Courses\Infrastructure\Resource;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Src\Api\Courses\Domain\Entities\Course;
 
 class CourseResource extends JsonResource
 {
+	/**
+     * Create a new resource instance.
+     *
+     * @param  mixed  $resource
+     */
+    public function __construct(Course $resource)
+    {
+        parent::__construct($resource);
+    }
+
     /**
      * Transform the resource into an array.
      *
