@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Courses\Course;
 use App\Models\Students\Student;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -9,6 +10,7 @@ use Src\Api\Students\Infrastructure\Policies\StudentPolicy;
 use Dedoc\Scramble\Scramble;
 use Dedoc\Scramble\Support\Generator\OpenApi;
 use Dedoc\Scramble\Support\Generator\SecurityScheme;
+use Src\Api\Courses\Infrastructure\Policies\CoursePolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,5 +39,6 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::policy(Student::class, StudentPolicy::class);
+        Gate::policy(Course::class, CoursePolicy::class);
     }
 }
