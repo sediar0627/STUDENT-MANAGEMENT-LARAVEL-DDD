@@ -52,7 +52,7 @@ El proyecto fue testeado con Pest.
 
 Para ejecutar los tests, debes ejecutar el comando `php artisan test` o `./vendor/bin/sail artisan test` si estás usando sail.
 
-![Test Results](test.png)
+![Test Results](tests.png)
 
 
 # Autor
