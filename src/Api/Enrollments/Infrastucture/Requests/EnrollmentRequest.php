@@ -29,7 +29,7 @@ class EnrollmentRequest extends CustomFormRequest
 				'exists:students,id',
 				function ($attribute, $value, $fail) use ($enrollment) {
 					if ($enrollment) {
-						$fail('Student already enrolled in this course');
+						$fail('Student already enrolled in this course.');
 					}
 				}
 			],
