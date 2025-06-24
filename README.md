@@ -46,6 +46,13 @@ Para acceder a la documentación, debes visitar la url `http://localhost:80/docs
 
 Para probar la API, puedes usar Postman con la colección que se encuentra en la raiz del proyecto o puedes usar la interfaz de la documentación.
 
+- Al ejecutar los seeders, se crearán los siguientes usuarios:
+	- Super Admin: super_admin@example.com (Tiene acceso a todas las rutas)
+	- Course User: course_user@example.com (Tiene acceso a las rutas de cursos)
+	- Student User: student_user@example.com (Tiene acceso a las rutas de estudiantes)
+
+La contraseña de todos los usuarios es `password`.
+
 # Covertura de test
 
 El proyecto fue testeado con Pest.
@@ -53,7 +60,6 @@ El proyecto fue testeado con Pest.
 Para ejecutar los tests, debes ejecutar el comando `php artisan test` o `./vendor/bin/sail artisan test` si estás usando sail.
 
 ![Test Results](tests.png)
-
 
 # Autor
 
