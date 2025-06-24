@@ -90,6 +90,7 @@ test('Course routes with token and permissions', function () use ($routes){
 	Course::factory()->create(); // Curso para ser eliminado por usuario super admin
 
 	$token = tokenWithCoursesPermissions();
+	$superAdminToken = tokenWithSuperAdminRole();
 
 	foreach ($routes as $routeData) {
 		$method = $routeData['method'];
@@ -110,13 +111,12 @@ test('Course routes with token and permissions', function () use ($routes){
 		$response->assertStatus($routeData['success_status']);
 
 		// Usuario super admin
-		$token = tokenWithSuperAdminRole();
 
 		$url = str_replace('{id}', 2, $routeData['url']); // Ej: /api/v1/courses/2
 
 		$response = $this->withHeaders([
 			'Accept' => 'application/json',
-			'Authorization' => 'Bearer ' . $token,
+			'Authorization' => 'Bearer ' . $superAdminToken,
 		])
 		->{$method}($url, [
 			'title' => 'Test Course',
