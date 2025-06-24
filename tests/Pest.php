@@ -11,6 +11,9 @@
 |
 */
 
+use App\Enum\PermissionCase;
+use App\Models\User;
+
 pest()->extend(Tests\TestCase::class)
  // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
@@ -41,7 +44,45 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function tokenWithSuperAdminRole(): string
 {
-    // ..
+    $user = User::factory()->create();
+    $user->assignRole('super-admin');
+
+    $token = $user->createToken('api')->plainTextToken;
+    $token = explode('|', $token)[1];
+
+    return $token;
+}
+
+function tokenWithCoursesPermissions(): string
+{
+    $user = User::factory()->create();
+    $user->givePermissionTo([
+        PermissionCase::CREATE_COURSE->value,
+        PermissionCase::EDIT_COURSE->value,
+        PermissionCase::DELETE_COURSE->value,
+        PermissionCase::VIEW_COURSE->value,
+    ]);
+
+    $token = $user->createToken('api')->plainTextToken;
+    $token = explode('|', $token)[1];
+
+    return $token;
+}
+
+function tokenWithStudentsPermissions(): string
+{
+    $user = User::factory()->create();
+    $user->givePermissionTo([
+        PermissionCase::CREATE_STUDENT->value,
+        PermissionCase::EDIT_STUDENT->value,
+        PermissionCase::DELETE_STUDENT->value,
+        PermissionCase::VIEW_STUDENT->value,
+    ]);
+
+    $token = $user->createToken('api')->plainTextToken;
+    $token = explode('|', $token)[1];
+
+    return $token;
 }
